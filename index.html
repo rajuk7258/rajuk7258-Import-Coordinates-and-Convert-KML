@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UTM to KML Exporter</title>
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log("Service Worker Registered"));
+    }
+  </script>
+  <style>
+    body { padding: 20px; }
+    #previewTable { max-height: 300px; overflow-y: scroll; display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3>Import UTM Coordinates and Export to KML (Zone 44N)</h3>
+    <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" class="form-control mb-3" />
+    
+    <div id="columnSelects" class="mb-3" style="display: none;">
+      <label for="eastingSelect">Select Easting Column:</label>
+      <select id="eastingSelect" class="form-control mb-2"></select>
+
+      <label for="northingSelect">Select Northing Column:</label>
+      <select id="northingSelect" class="form-control mb-2"></select>
+
+      <label for="nameSelect">Select Name Column:</label>
+      <select id="nameSelect" class="form-control mb-2"></select>
+
+      <button class="btn btn-success" onclick="downloadKML()">Download KML</button>
+    </div>
+
+    <div id="previewTable" class="mt-4"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
